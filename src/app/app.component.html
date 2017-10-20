@@ -1,8 +1,21 @@
-<div>
+<!-- <div>
   我是父组件
 </div>
 <div>
   <input type="text" placeholder="请输入股票代码" [(ngModel)]="stock" ><br>
   <input type="text" placeholder="请输入数量" [(ngModel)]="amount" ><br>
   <app-order [stockCode]="stock" [amount]="amount"></app-order>
+</div> -->
+
+<app-price-quote (lastPrice)="priceQuoteHandler($event)" (buy)="buyHandler($event)"></app-price-quote>
+<h3>
+  这是app组件，是priceQuote组件的父组件：
+</h3>
+<div>
+  APP组件接收到的股票代码是{{priceQuote.stockCode}},股票价格是{{priceQuote.lastPrice | number: '2.2-2'}}。
 </div>
+<div>
+  购买的股票代码是{{buy.stockCode}}，股票当时价格是{{buy.lastPrice | number: '2.2-2'}}!
+</div>
+<input type="text" placeholder="请输入数量" [(ngModel)]="amount" ><br>
+<app-order [priceQuote]="buy" [amount]="amount" [stockCode]="stock"></app-order>
